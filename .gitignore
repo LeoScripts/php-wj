@@ -1,0 +1,6 @@
+
+/assets
+/doc
+/vendor/*
+.vscode
+.env
