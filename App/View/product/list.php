@@ -9,6 +9,7 @@
       <th>Descrição</th>
       <th>Imagem</th>
       <th>Preço</th>
+      <th>Categoria</th>
       <th>Quantidade</th>
       <th>Data de Cadastro</th>
       <th>Ações</th>
@@ -16,6 +17,7 @@
   </thead>
   <tbody>
     <?php
+      
       while ($product = $data->fetch(PDO::FETCH_ASSOC)) {
 
         extract($product);
@@ -27,6 +29,9 @@
         echo "<td>{$description}</td>";
         echo "<td><img width='50px' src='{$photo}'></td>";
         echo "<td>R$ {$price}</td>";
+        echo "<td>";
+
+        echo "</td>";
         echo "<td>{$quantity}</td>";
         echo "<td>{$created_at}</td>";
 
