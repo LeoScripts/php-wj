@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types = 1)
-;
+declare(strict_types = 1);
 
 namespace App\Controller;
-
 use App\Connection\Connection;
 use Dompdf\Dompdf;
 
@@ -13,11 +11,17 @@ class ProductController extends AbstractController
   public function listAction(): void
   {
     $con = Connection::getConnection();
-
     $result = $con->prepare('SELECT * FROM product');
     $result->execute();
 
-    parent::render('product/list', $result);
+    $query = "SELECT category.name
+      FROM product_category
+      INNER JOIN category ON (category.code = product_category.category_code)
+      INNER JOIN product ON ( product.sku = product_category.product_sku AND product.name='teclado');";
+    $resultCategory = $con->prepare($query);
+    $resultCategory->execute();
+
+    parent::render('product/list', $result, $resultCategory);
   }
 
   public function addAction(): void
@@ -34,18 +38,15 @@ class ProductController extends AbstractController
 
       $query = "INSERT INTO product (name, description, price, photo, quantity, created_at)
       VALUES
-      ('{$name}','{$description}',{$price},'{$photo}','{$quantity}','{$createdAt}')
-      ";
+      ('{$name}','{$description}',{$price},'{$photo}','{$quantity}','{$createdAt}')";
       $con = Connection::getConnection();
       $resultAdd = $con->prepare($query);
       $resultAdd->execute();
-
       echo 'Produto adcionado com sucesso';
     }
 
     $result = $con->prepare('SELECT * FROM category');
     $result->execute();
-
     parent::render('product/add', $result);
   }
 
@@ -53,9 +54,7 @@ class ProductController extends AbstractController
   {
     $sku = $_GET['sku'];
     $con = Connection::getConnection();
-
     $query = "DELETE FROM product WHERE sku='{$sku}'";
-
     $result = $con->prepare($query);
     $result->execute();
 

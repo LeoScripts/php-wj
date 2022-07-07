@@ -41,7 +41,7 @@ VALUES
 
 
 
--- busca produtos da categoria
+-- busca produtos que estejam na categoria selecionada
 SELECT 
     product.name
 FROM product_category
