@@ -1,19 +1,30 @@
-<h1>Listar produtos</h1>
-<a href="/produtos/novo" class="btn btn-outline-primary">Novo produto</a>
-<a href="/produtos/relatorio" class="btn btn-outline-dark">Gerar PDF</a>
+<h1>Produtos</h1>
+<a href="/produtos/novo" class="btn-action">Novo produto</a>
+<a href="/produtos/relatorio" class="btn-action">Gerar PDF</a>
 <table class="table table-hover table-stripred">
   <thead class="table-dark">
-    <tr>
-      <th>SKU</th>
-      <th>Nome</th>
-      <th>Descrição</th>
-      <th>Imagem</th>
-      <th>Preço</th>
-      <th>Categoria</th>
-      <th>Quantidade</th>
-      <th>Data de Cadastro</th>
-      <th>Ações</th>
-    </tr>
+  <table class="data-grid">
+      <tr class="data-row">
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Name</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">SKU</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Price</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Quantity</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Categories</span>
+        </th>
+
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Actions</span>
+        </th>
+      </tr>
   </thead>
   <tbody>
     <?php
@@ -22,25 +33,27 @@
 
         extract($product);
 
-        echo '<tr>';
+        echo '<tr class="data-row">';
 
-        echo "<td>{$sku}</td>";
-        echo "<td>{$name}</td>";
-        echo "<td>{$description}</td>";
-        echo "<td><img width='50px' src='{$photo}'></td>";
-        echo "<td>R$ {$price}</td>";
-        echo "<td>";
-
-        echo "</td>";
-        echo "<td>{$quantity}</td>";
-        echo "<td>{$created_at}</td>";
-
+        echo "<td class='data-grid-td'>
+          <span class='data-grid-cell-content'>{$name}</span>
+        </td>";
+        echo "<td class='data-grid-td'>
+          <span class='data-grid-cell-content'>{$sku}</span>
+        </td>";
+        echo "<td class='data-grid-td'>
+          <span class='data-grid-cell-content'>{$price}</span>
+        </td>";
+        echo "<td class='data-grid-td'>
+          <span class='data-grid-cell-content'>{$quantity}</span>
+        </td>";
+        echo "<td class='data-grid-td'>
+          <span class='data-grid-cell-content'>categoria</span>
+        </td>";
         echo "<td>
           <a href='/produtos/editar?sku={$sku}' class='btn btn-warning btn-sm'>Editar</a>
           <a href='/produtos/excluir?sku={$sku}' class='btn btn-danger btn-sm'>Excluir</a>
         </td>";
-
-        echo '</tr>';
       }
     ?>
   </tbody>

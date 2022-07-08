@@ -1,32 +1,37 @@
-<h1>Listar Categoria</h1>
-<a href="/categorias/nova" class="btn btn-outline-primary">Novo Categoria</a>
+<h1>Categoria</h1>
+<a href="/categorias/nova" class="btn-action">Novo Categoria</a>
 
-<table class="table table-hover table-stripred">
-  <thead class="table-dark">
-    <tr>
-      <th>Codigo</th>
-      <th>Nome</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
+<table class="data-grid">
+      <tr class="data-row">
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Name</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Code</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Actions</span>
+        </th>
+      </tr>
+      
   <tbody>
     <?php
     while ($category = $data->fetch(PDO::FETCH_ASSOC)) {
-      // $id = $category['id'];
-      // $name = $category['name'];
-      // $description = $category['description'];
-
-      // igual a desconstrutor js
       extract($category);
 
-      echo '<tr>';
+      echo '<tr class="data-row">';
 
-      echo "<td>{$code}</td>";
-      echo "<td>{$name}</td>";
+      echo "<td class='data-grid-td'>
+        <span class='data-grid-cell-content'>{$name}</span>
+      </td>";
+      echo "<td class='data-grid-td'>
+        <span class='data-grid-cell-content'>{$code}</span>
+        
+      </td>";
 
-      echo "<td>
-        <a href='/categorias/editar?code={$code}' class='btn btn-warning btn-sm'>Editar</a>
-        <a href='/categorias/excluir?code={$code}' class='btn btn-danger btn-sm'>Excluir</a>
+      echo "<td class='data-grid-td'>
+        <a href='/categorias/editar?code={$code}' class='action edit'>Editar</a>
+        <a href='/categorias/excluir?code={$code}' class='action edit'>Excluir</a>
       </td>";
 
       echo '</tr>';
