@@ -26,11 +26,11 @@ FOREIGN KEY(category_code) REFERENCES category(code)
 );
 
 
-INSERT INTO  category (name, description)
+INSERT INTO  category (name)
 VALUES
-('informatica', 'coisas de informatica'),
-('escritorio', 'coisas de escritorio'),
-('papelaria', 'coisas de papelaria');
+('informatica'),
+('escritorio'),
+('papelaria');
 
 INSERT INTO  product (name, description, photo, price,quantity, created_at)
 VALUES
